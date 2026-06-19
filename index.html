@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JR九州 運用ビューア</title>
+    <link rel="stylesheet" href="assets/app.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">JR九州 列車運用</p>
+          <h1>運用ビューア</h1>
+        </div>
+        <a class="admin-link" href="admin.html">管理</a>
+      </header>
+
+      <main class="viewer-layout">
+        <section class="panel route-picker" id="homePanel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">路線選択</p>
+              <h2>閲覧する路線を選んでください</h2>
+            </div>
+          </div>
+          <label class="field">
+            <span>路線</span>
+            <select id="routeSelect"></select>
+          </label>
+          <button class="primary" id="loadRouteButton">在線位置を表示</button>
+          <p class="note" id="fetchNote"></p>
+        </section>
+
+        <section class="panel content-panel hidden" id="contentPanel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow" id="selectedGroup">路線</p>
+              <h2 id="selectedRoute">未選択</h2>
+            </div>
+            <button class="ghost" id="reloadButton">更新</button>
+          </div>
+
+          <div class="status-strip">
+            <div>
+              <span>取得元</span>
+              <strong id="sourceUrl">-</strong>
+            </div>
+            <div>
+              <span>最終更新</span>
+              <strong id="lastUpdated">-</strong>
+            </div>
+            <div>
+              <span>列車数</span>
+              <strong id="trainCount">0</strong>
+            </div>
+          </div>
+
+          <div class="tab-page" id="positionPage">
+            <div class="train-grid" id="trainGrid"></div>
+          </div>
+
+          <div class="tab-page hidden" id="operationPage">
+            <div class="operation-list" id="operationList"></div>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="表示切替">
+        <button class="nav-item active" data-tab="position">在線位置</button>
+        <button class="nav-item" data-tab="operation">運用一覧</button>
+      </nav>
+    </div>
+
+    <dialog class="assign-dialog" id="assignDialog">
+      <form method="dialog" class="dialog-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">運用投稿</p>
+            <h2 id="dialogTitle">投稿</h2>
+          </div>
+          <button class="icon-button" value="cancel" aria-label="閉じる">×</button>
+        </div>
+        <label class="field">
+          <span>運用</span>
+          <select id="assignOperation"></select>
+        </label>
+        <label class="field">
+          <span>列車番号</span>
+          <input id="assignTrainNumber" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>メモ</span>
+          <textarea id="assignMemo" rows="3"></textarea>
+        </label>
+        <div class="dialog-actions">
+          <button class="ghost" value="cancel">キャンセル</button>
+          <button class="primary" id="saveAssignmentButton" value="default">保存</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="assets/data.js"></script>
+    <script src="assets/storage.js"></script>
+    <script src="assets/viewer.js"></script>
+  </body>
+</html>
